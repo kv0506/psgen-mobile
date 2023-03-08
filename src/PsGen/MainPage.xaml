@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:psGen="clr-namespace:PsGen"
+             x:Class="PsGen.MainPage">
+
+	<ContentPage.BindingContext>
+		<psGen:MainViewModel />
+	</ContentPage.BindingContext>
+
+	<Grid RowDefinitions="*,Auto">
+		<ScrollView Grid.Row="0">
+			<VerticalStackLayout
+				Spacing="10"
+				Padding="15"
+				VerticalOptions="Start">
+
+				<Entry Placeholder="Pattern" ClearButtonVisibility="WhileEditing" IsSpellCheckEnabled="False"
+				       IsTextPredictionEnabled="False" ReturnType="Next" IsPassword="True" Text="{Binding Pattern}">
+					<Entry.Keyboard>
+						<Keyboard x:FactoryMethod="Create">
+							<x:Arguments>
+								<KeyboardFlags>CapitalizeNone</KeyboardFlags>
+							</x:Arguments>
+						</Keyboard>
+					</Entry.Keyboard>
+				</Entry>
+
+				<Entry Placeholder="Pin" Keyboard="Numeric" MaxLength="8" ClearButtonVisibility="WhileEditing"
+				       IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" ReturnType="Next"
+				       IsPassword="True" Text="{Binding Pin}">
+				</Entry>
+
+				<Entry Placeholder="Length" Keyboard="Numeric" MaxLength="2" ClearButtonVisibility="WhileEditing"
+				       IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" ReturnType="Next" Text="{Binding Length}" />
+
+				<Grid ColumnDefinitions="*,Auto" Margin="0,0,0,0">
+					<Label Grid.Column="0" Text="Include Special Character" VerticalTextAlignment="Center" />
+					<Switch Grid.Column="1" IsToggled="{Binding IncludeSpecialCharacter}" />
+				</Grid>
+
+				<Grid ColumnDefinitions="*,Auto" Margin="0,0,0,0">
+					<Label Grid.Column="0" Text="Use Custom Special Character" VerticalTextAlignment="Center" />
+					<Switch Grid.Column="1" IsToggled="{Binding UseCustomSpecialCharacter}"
+					        IsEnabled="{Binding IncludeSpecialCharacter}" />
+				</Grid>
+
+				<Entry Placeholder="Custom Special Character" Keyboard="Text" MaxLength="1" ReturnType="Done"
+				       Text="{Binding CustomSpecialCharacter}" IsEnabled="{Binding UseCustomSpecialCharacter}" />
+
+				<Grid ColumnDefinitions="*,Auto" Margin="0,0,0,0">
+					<Label Grid.Column="0" Text="Show Password" VerticalTextAlignment="Center" />
+					<Switch Grid.Column="1" IsToggled="{Binding ShowPassword}" />
+				</Grid>
+
+				<Grid Padding="15"
+				      BackgroundColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray100}}">
+					<Label FontSize="20" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+					       TextColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray500}}"
+					       Text="{Binding Password}"/>
+					<Grid.Triggers>
+						<DataTrigger TargetType="Grid" Binding="{Binding Password.Length}" Value="0">
+							<Setter Property="IsVisible" Value="False"/>
+						</DataTrigger>
+					</Grid.Triggers>
+				</Grid>
+
+			</VerticalStackLayout>
+		</ScrollView>
+		<Grid Grid.Row="1" Padding="10" ColumnDefinitions="*,*,*" ColumnSpacing="10">
+			<Button Grid.Column="0" Text="Clear" Command="{Binding ClearPasswordCommand}" />
+			<Button Grid.Column="1" Text="Copy" Command="{Binding CopyPasswordCommand}" />
+			<Button Grid.Column="2" Text="Generate" Command="{Binding GeneratePasswordCommand}" />
+		</Grid>
+	</Grid>
+
+</ContentPage>
