@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="500" viewBox="0 0 1024 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2B0B98"/>
+      <stop offset="100%" stop-color="#512BD4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background gradient -->
+  <rect width="1024" height="500" fill="url(#bg)"/>
+
+  <!-- Subtle decorative circles -->
+  <circle cx="120" cy="400" r="200" fill="#ffffff" opacity="0.03"/>
+  <circle cx="900" cy="80" r="180" fill="#ffffff" opacity="0.03"/>
+
+  <!-- App icon area (left side) -->
+  <g transform="translate(280, 100)">
+    <!-- Shield -->
+    <path d="M0 -60 L70 -28 C70 -28 74 68 0 140 C-74 68 -70 -28 -70 -28 Z"
+          fill="none" stroke="#ffffff" stroke-width="10" stroke-linejoin="round"
+          transform="translate(0, 60)"/>
+    <!-- Person head -->
+    <circle cx="0" cy="60" r="20" fill="none" stroke="#ffffff" stroke-width="8"/>
+    <!-- Person body -->
+    <line x1="0" y1="80" x2="0" y2="126" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+    <!-- Key lines -->
+    <line x1="0" y1="112" x2="12" y2="112" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+    <line x1="0" y1="122" x2="10" y2="122" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <!-- App name -->
+  <text x="550" y="220" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="80" font-weight="bold" fill="#ffffff" text-anchor="start">
+    PsGen
+  </text>
+
+  <!-- Tagline -->
+  <text x="550" y="275" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="28" fill="#DFD8F7" text-anchor="start">
+    Secure Password Manager
+  </text>
+
+  <!-- Decorative bottom line -->
+  <rect x="550" y="300" width="120" height="4" rx="2" fill="#DFD8F7" opacity="0.6"/>
+</svg>
