@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PsGen.Mobile.Views.AccountsPage"
+             Title="Accounts">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="15" RowSpacing="10">
+
+        <!-- Search bar -->
+        <SearchBar x:Name="SearchBar"
+                   Grid.Row="0"
+                   Placeholder="Search accounts..."
+                   TextChanged="OnSearchTextChanged" />
+
+        <!-- Favorites section -->
+        <VerticalStackLayout x:Name="FavoritesSection" Grid.Row="1" IsVisible="False">
+            <Label Text="Favorites"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}"
+                   Margin="0,0,0,5" />
+            <CollectionView x:Name="FavoritesCollection"
+                            HeightRequest="80"
+                            SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="12,8" StrokeShape="RoundRectangle 8"
+                               Stroke="Transparent"
+                               BackgroundColor="{StaticResource Primary}" MinimumWidthRequest="120">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnFavoriteAccountTapped" CommandParameter="{Binding Id}" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout VerticalOptions="Center">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="White" FontSize="14" />
+                                <Label Text="{Binding Category}" TextColor="#DDDDDD" FontSize="12" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+
+        <!-- Accounts list -->
+        <RefreshView x:Name="RefreshContainer" Grid.Row="2" Refreshing="OnRefreshing">
+            <CollectionView x:Name="AccountsCollection"
+                            SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
+                        <Label Text="No accounts found"
+                               FontSize="16"
+                               TextColor="{StaticResource Gray400}"
+                               HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView Margin="0,2">
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="Red"
+                                               Invoked="OnDeleteAccount"
+                                               CommandParameter="{Binding Id}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Border Padding="15" StrokeShape="RoundRectangle 8"
+                                   Stroke="{StaticResource Gray200}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAccountTapped" CommandParameter="{Binding Id}" />
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                                     <Label Grid.Row="0" Grid.Column="0"
+                                            Text="{Binding Name}"
+                                            FontSize="16"
+                                            FontAttributes="Bold" />
+                                     <Label Grid.Row="1" Grid.Column="0"
+                                            Text="{Binding Category}"
+                                            FontSize="13"
+                                            TextColor="{StaticResource Gray400}" />
+                                     <Label Grid.Row="2" Grid.Column="0"
+                                            Text="{Binding Username}"
+                                            FontSize="12"
+                                            TextColor="{StaticResource Gray500}" />
+                                     <HorizontalStackLayout Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"
+                                                            VerticalOptions="Center" Spacing="10">
+                                         <ImageButton Source="key.png"
+                                                      WidthRequest="24" HeightRequest="24"
+                                                      Clicked="OnGeneratePassword"
+                                                      CommandParameter="{Binding Id}"
+                                                      BackgroundColor="Transparent" />
+                                         <ImageButton Source="star.png"
+                                                      WidthRequest="24" HeightRequest="24"
+                                                      Clicked="OnToggleFavorite"
+                                                      CommandParameter="{Binding Id}"
+                                                      BackgroundColor="Transparent" />
+                                     </HorizontalStackLayout>
+                                </Grid>
+                            </Border>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <ActivityIndicator x:Name="LoadingIndicator"
+                           Grid.Row="2"
+                           IsRunning="False"
+                           IsVisible="False"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Color="{StaticResource Primary}" />
+    </Grid>
+
+</ContentPage>

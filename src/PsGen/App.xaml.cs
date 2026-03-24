@@ -1,11 +1,26 @@
-﻿namespace PsGen;
+﻿using PsGen.Mobile.Services;
+using PsGen.Mobile.Views;
+
+namespace PsGen.Mobile;
 
 public partial class App : Application
 {
-	public App()
+	private readonly IServiceProvider _services;
+
+	public App(IServiceProvider services)
 	{
 		InitializeComponent();
+		_services = services;
+	}
 
-		MainPage = new AppShell();
+	protected override Window CreateWindow(IActivationState? activationState)
+	{
+		var authService = _services.GetRequiredService<AuthService>();
+
+		Page startPage = authService.IsLoggedIn
+			? new AppShell()
+			: new NavigationPage(_services.GetRequiredService<LoginPage>());
+
+		return new Window(startPage);
 	}
 }
