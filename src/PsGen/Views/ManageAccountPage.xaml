@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PsGen.Mobile.Views.ManageAccountPage"
+             Title="Manage Account">
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="15">
+
+            <Label Text="Account Name" FontSize="14" FontAttributes="Bold" />
+            <Entry x:Name="AccountNameEntry" Placeholder="Account name" />
+
+            <Label Text="Category" FontSize="14" FontAttributes="Bold" />
+            <Entry x:Name="CategoryEntry" Placeholder="Category (e.g. Social, Banking)" />
+
+            <Label Text="Username" FontSize="14" FontAttributes="Bold" />
+            <Entry x:Name="UsernameEntry" Placeholder="Username or email" />
+
+            <Label Text="Pattern" FontSize="14" FontAttributes="Bold" />
+            <Entry x:Name="PatternEntry" Placeholder="Secret pattern" IsPassword="True" />
+
+            <Label Text="Length" FontSize="14" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,60">
+                <Slider x:Name="LengthSlider" Minimum="8" Maximum="44" Value="20"
+                        ValueChanged="OnLengthChanged" />
+                <Label x:Name="LengthLabel" Grid.Column="1" Text="20"
+                       VerticalOptions="Center" HorizontalOptions="Center" />
+            </Grid>
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Include Special Character" VerticalOptions="Center" />
+                <Switch x:Name="IncludeSpecialSwitch" Grid.Column="1" IsToggled="True"
+                        Toggled="OnIncludeSpecialToggled" />
+            </Grid>
+
+            <Grid x:Name="CustomSpecialSection" ColumnDefinitions="*,Auto">
+                <Label Text="Use Custom Special Char" VerticalOptions="Center" />
+                <Switch x:Name="UseCustomSpecialSwitch" Grid.Column="1" IsToggled="False"
+                        Toggled="OnUseCustomSpecialToggled" />
+            </Grid>
+
+            <Entry x:Name="CustomSpecialCharEntry"
+                   Placeholder="Special character (e.g. #)"
+                   MaxLength="1"
+                   IsVisible="False" />
+
+            <Label Text="Notes" FontSize="14" FontAttributes="Bold" />
+            <Editor x:Name="NotesEditor" Placeholder="Notes" HeightRequest="100"
+                    AutoSize="TextChanges" />
+
+            <Label x:Name="ErrorLabel" TextColor="Red" IsVisible="False" FontSize="14" />
+
+            <Button x:Name="SaveButton" Text="Save"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    CornerRadius="8" />
+
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               IsRunning="False" IsVisible="False"
+                               Color="{StaticResource Primary}"
+                               HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace PsGen;
+namespace PsGen.Mobile;
 
 [Application]
 public class MainApplication : MauiApplication
