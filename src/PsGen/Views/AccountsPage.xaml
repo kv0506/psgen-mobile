@@ -57,7 +57,7 @@
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <SwipeView>
+                        <SwipeView Margin="0,2">
                             <SwipeView.RightItems>
                                 <SwipeItems>
                                     <SwipeItem Text="Delete"
@@ -66,7 +66,7 @@
                                                CommandParameter="{Binding Id}" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Border Padding="15" Margin="0,5" StrokeShape="RoundRectangle 8"
+                            <Border Padding="15" StrokeShape="RoundRectangle 8"
                                    Stroke="{StaticResource Gray200}">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnAccountTapped" CommandParameter="{Binding Id}" />

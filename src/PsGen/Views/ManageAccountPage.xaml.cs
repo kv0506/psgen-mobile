@@ -39,6 +39,7 @@ public partial class ManageAccountPage : ContentPage
         UseCustomSpecialSwitch.IsToggled = _account.UseCustomSpecialCharacter;
         CustomSpecialCharEntry.Text = _account.CustomSpecialCharacter;
         NotesEditor.Text = _account.Notes;
+        FavoriteSwitch.IsToggled = _account.IsFavorite;
 
         UpdateSpecialCharVisibility();
         Title = "Edit Account";
@@ -112,7 +113,7 @@ public partial class ManageAccountPage : ContentPage
                     UseCustomSpecialCharacter = UseCustomSpecialSwitch.IsToggled,
                     CustomSpecialCharacter = CustomSpecialCharEntry.Text?.Trim() ?? string.Empty,
                     Notes = NotesEditor.Text?.Trim() ?? string.Empty,
-                    IsFavorite = _account.IsFavorite
+                    IsFavorite = FavoriteSwitch.IsToggled
                 };
 
                 var response = await _accountService.UpdateAsync(request);
@@ -140,7 +141,7 @@ public partial class ManageAccountPage : ContentPage
                     UseCustomSpecialCharacter = UseCustomSpecialSwitch.IsToggled,
                     CustomSpecialCharacter = CustomSpecialCharEntry.Text?.Trim() ?? string.Empty,
                     Notes = NotesEditor.Text?.Trim() ?? string.Empty,
-                    IsFavorite = false
+                    IsFavorite = FavoriteSwitch.IsToggled
                 };
 
                 var response = await _accountService.CreateAsync(request);

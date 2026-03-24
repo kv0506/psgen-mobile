@@ -48,6 +48,11 @@
             <Editor x:Name="NotesEditor" Placeholder="Notes" HeightRequest="100"
                     AutoSize="TextChanges" />
 
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="Favorite" VerticalOptions="Center" FontSize="14" FontAttributes="Bold" />
+                <Switch x:Name="FavoriteSwitch" Grid.Column="1" IsToggled="False" />
+            </Grid>
+
             <Label x:Name="ErrorLabel" TextColor="Red" IsVisible="False" FontSize="14" />
 
             <Button x:Name="SaveButton" Text="Save"
